@@ -123,6 +123,7 @@ def eval_epoch(val_loader, model, model_fn, epoch):
 
 
 if __name__ == '__main__':
+    # torch.backends.cudnn.enabled = False
     ##### init
     init()
 
@@ -160,7 +161,7 @@ if __name__ == '__main__':
     ##### model_fn (criterion)
     model_fn = model_fn_decorator()
 
-    ##### dataset
+    ##### dataset TODO
     if cfg.dataset == 'scannetv2':
         if data_name == 'scannet':
             import data.scannetv2_inst

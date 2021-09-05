@@ -12,14 +12,14 @@ import torch
 import logging
 import os
 logging.basicConfig(level=logging.DEBUG,#控制台打印的日志级别
-                filename='process.log',
+                filename='process2.log',
                 filemode='a',#模式，有w和a，w就是写模式，每次都会重新写日志，覆盖之前的日志
                 #a是追加模式，默认如果不写的话，就是追加模式
                 format='%(asctime)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s'
                 #日志格式
                 )
-ROOT = '/data2/result/train/h5/'
-SAVE_ROOT = '/data2/helin/10.0_PointGroup/dataset/sapien_v2/train/'
+ROOT = '/data2/result/test/h5/'
+SAVE_ROOT = '/data2/helin/10.0_PointGroup/dataset/sapien_v2/test/'
 
 def load_h5(fn):
     with h5py.File(fn, 'r') as fin:

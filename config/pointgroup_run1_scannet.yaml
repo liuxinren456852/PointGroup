@@ -7,9 +7,9 @@ GENERAL:
 DATA:
   data_root: dataset
   dataset: scannetv2
-  filename_suffix: _inst_nostuff.pth
+  filename_suffix: .pth
 
-  classes: 20
+  classes: 8
   ignore_label: -100
 
   input_channel: 3
