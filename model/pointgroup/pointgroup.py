@@ -461,7 +461,7 @@ def model_fn_decorator(test=False):
         offset_norm_loss = torch.sum(pt_dist * valid) / (torch.sum(valid) + 1e-6)
 
         gt_offsets_norm = torch.norm(gt_offsets, p=2, dim=1)   # (N), float
-        gt_offsets_ = gt_offsets / (gt_offsets_norm.unsqueeze(-1) + 1e-8)
+        gt_offsets_ = gt_offsets / (gt_offsets_norm.unsqueeze(-1) + 1e-8) # TODO
         pt_offsets_norm = torch.norm(pt_offsets, p=2, dim=1)
         pt_offsets_ = pt_offsets / (pt_offsets_norm.unsqueeze(-1) + 1e-8)
         direction_diff = - (gt_offsets_ * pt_offsets_).sum(-1)   # (N)

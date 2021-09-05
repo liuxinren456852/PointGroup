@@ -9,7 +9,7 @@ DATA:
   dataset: scannetv2
   filename_suffix: .pth
 
-  classes: 8
+  classes: 100
   ignore_label: -100
 
   input_channel: 3
