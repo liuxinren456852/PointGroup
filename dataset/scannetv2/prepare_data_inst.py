@@ -4,7 +4,7 @@ Modified from SparseConvNet data preparation: https://github.com/facebookresearc
 
 import glob, plyfile, numpy as np, multiprocessing as mp, torch, json, argparse
 
-import scannet_util
+# import scannet_util
 
 # Map relevant classes to {0,1,...,19}, and ignored classes to -100
 remapper = np.ones(150) * (-100)
@@ -42,7 +42,7 @@ def f(fn):
     fn2 = fn[:-3] + 'labels.ply'
     fn3 = fn[:-15] + '_vh_clean_2.0.010000.segs.json'
     fn4 = fn[:-15] + '.aggregation.json'
-    print(fn)
+    print('fn: ' + fn)
 
     f = plyfile.PlyData().read(fn)
     points = np.array([list(x) for x in f.elements[0]])
@@ -66,10 +66,11 @@ def f(fn):
     with open(fn4) as jsondata:
         d = json.load(jsondata)
         for x in d['segGroups']:
-            if scannet_util.g_raw2scannetv2[x['label']] != 'wall' and scannet_util.g_raw2scannetv2[x['label']] != 'floor':
+            # if scannet_util.g_raw2scannetv2[x['label']] != 'wall' and scannet_util.g_raw2scannetv2[x['label']] != 'floor':
+            if True:
                 instance_segids.append(x['segments'])
                 labels.append(x['label'])
-                assert(x['label'] in scannet_util.g_raw2scannetv2.keys())
+                # assert(x['label'] in scannet_util.g_raw2scannetv2.keys())
     if(fn == 'val/scene0217_00_vh_clean_2.ply' and instance_segids[0] == instance_segids[int(len(instance_segids) / 2)]):
         instance_segids = instance_segids[: int(len(instance_segids) / 2)]
     check = []
@@ -86,6 +87,7 @@ def f(fn):
         assert(len(np.unique(sem_labels[pointids])) == 1)
 
     torch.save((coords, colors, sem_labels, instance_labels), fn[:-15]+'_inst_nostuff.pth')
+    print(coords,'print\n', colors,'print\n', sem_labels,'print\n', instance_labels)
     print('Saving to ' + fn[:-15]+'_inst_nostuff.pth')
 
 # for fn in files:
